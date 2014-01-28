@@ -46,10 +46,26 @@ void loop()
         {
           Serial.println("Speed (knots): " + lndSpeed);
         }
-
-        if(lndSpeed > "")
+        
+        if(gpsTime > "")
         {
-          Serial.println("Time of Fix: " + gpsTime.toInt() - 5);
+          /*String * t;
+          String t1 = gpsTime;
+          int gpsTimeI;
+          t=&t1;
+          gpsTimeI = atoi((char *)t);*/
+          //gpsTime = "280114";
+          int timeLen = gpsTime.length();
+          int gpsTimeI;
+          char gpsTimeC[timeLen];
+          ((String)gpsTime).toCharArray(gpsTimeC, timeLen);
+          gpsTimeI = atoi(gpsTimeC);
+          gpsTimeI += -50000;
+          Serial.print("Time of Fix: ");
+          Serial.print(gpsTimeC);
+          Serial.print(" UTC - ");
+          Serial.print(gpsTimeI);
+          Serial.println(" EST");         
         }           
       }
     }
